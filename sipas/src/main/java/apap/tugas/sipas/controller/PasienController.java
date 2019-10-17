@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -85,4 +82,14 @@ public class PasienController {
 
         return "tambah-pasien";
     }
+
+    @RequestMapping(value = "/pasien", method = RequestMethod.GET, params = "nikPasien")
+        public String viewPasien(@RequestParam(value = "nikPasien") String nikPasien, Model model) {
+        PasienModel pasien = pasienService.getByNikPasien(nikPasien).get();
+        model.addAttribute("pasien", pasien);
+        model.addAttribute("listAsuransi", pasien.getListAsuransi());
+        return "lihat-pasien";
+    }
+
+    
 }

@@ -8,6 +8,7 @@ import java.util.Optional;
 public interface PasienService {
     List<PasienModel> getPasienList();
     void addPasien(PasienModel pasien);
-    Optional<PasienModel> GetByIdPasien(Long idPasien);
+    Optional<PasienModel> getByIdPasien(Long idPasien);
+    Optional<PasienModel> getByNikPasien(String nikPasien);
 //    void kodePasien(PasienModel pasien);
 }

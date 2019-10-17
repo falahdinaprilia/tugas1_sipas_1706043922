@@ -26,8 +26,13 @@ public class PasienServiceImpl implements PasienService {
     }
 
     @Override
-    public Optional<PasienModel> GetByIdPasien(Long idPasien) {
+    public Optional<PasienModel> getByIdPasien(Long idPasien) {
         return pasienDb.findById(idPasien);
+    }
+
+    @Override
+    public Optional<PasienModel> getByNikPasien(String nikPasien) {
+        return pasienDb.findByNik(nikPasien);
     }
 
 //    @Override
