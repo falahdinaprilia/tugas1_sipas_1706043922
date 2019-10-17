@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://wwww.thymelaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Tambah Pasien</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<object th:replace="fragments/fragment :: navbar"></object>
+<div class = "container-fluid">
+    <div class="row">
+        <div class="container p-5 text-center">
+            <h2>Tambah Pasien</h2>
+            <br>
+            <form th:action="@{/pasien/tambah}" th:object="${pasien}" method="POST">
+                <br>
+                <div class="row pt-1">
+                    <label class="col-sm-4">Nama</label>
+                    <input class="col-sm-7 form-control" type="text" name="nama" th:field="*{nama}"/>
+                    <br>
+                </div>
+                <div class="row pt-1">
+                    <label  class="col-sm-4">NIK</label>
+                    <input class="col-sm-7 form-control" type="text" name="nik" th:field="*{nik}" />
+                    <br>
+                </div>
+                <div class="row pt-1">
+                    <label  class="col-sm-4">Jenis Kelamin</label>
+                    <select class="col-sm-7 form-control"  th:field="*{jenisKelamin}">
+                        <option th:value="'1'" th:text="Laki-laki"></option>
+                        <option th:value="'2'" th:text="Perempuan"></option>
+                    </select>
+                    <br>
+                </div>
+                <div class="row pt-1">
+                    <label  class="col-sm-4">Tempat Lahir</label>
+                    <input class="col-sm-7 form-control"  type="text" name="tempatLahir" th:field="*{tempatLahir}"/>
+                    <br>
+                </div>
+                <div class="row pt-1">
+                    <label  class="col-sm-4">Tanggal Lahir</label>
+                    <input class="col-sm-7 form-control" type="date" name="tanggalLahir" th:field="*{tanggalLahir}"/>
+                    <br>
+                </div>
+                <div class="row pt-1">
+                    <label  class="col-sm-4">Asuransi</label>
+                        <select class ="col-sm-7 form-control" name="asuransi">
+<!--                            th:each="asuransiPasien, rowStat : *{asuransiList}"
+                                th:field="*{asuransiList[__${rowStat.index}__].asuransi"-->
+<!--                            <option th:value="'${rowStat.index}'" selected></option>-->
+                            <option th:each="asuransi : ${allAsuransiList}" th:value="${asuransi.id}" th:text="${asuransi.nama}"></option>
+                        </select>
+                </div>
+                <br>
+                <a class=" col-sm-3 form-control btn btn-sm btn-dark" th:href="@{/}">Tambah Asuransi</a>
+                <br>
+                <br>
+                <div class="row pt-1">
+                    <label  class="col-sm-4">Emergency Contact Name</label>
+                    <input class="col-sm-7 form-control" type="text" name="nama" th:field="*{emergencyContact.nama}" />
+                    <br>
+                </div>
+                <div class="row pt-1">
+                    <label  class="col-sm-4">Emergency Contact NIK</label>
+                    <input class="col-sm-7 form-control" type="text" name="nik" th:field="*{emergencyContact.nik}"/>
+                    <br>
+                </div>
+                <div class="row pt-1">
+                    <label  class="col-sm-4">Emergency Contact Phone</label>
+                    <input class="col-sm-7 form-control" type="text" name="noHp" th:field="*{emergencyContact.noHp}"/>
+                    <br>
+                </div>
+                <br>
+                <button class="col-sm-3 form-control btn btn-sm btn-primary" type="submit"> Submit </button>
+                <br>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</div>
+</body>
+</html>
