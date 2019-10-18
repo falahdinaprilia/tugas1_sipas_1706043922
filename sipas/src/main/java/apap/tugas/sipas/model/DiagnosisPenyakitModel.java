@@ -12,7 +12,7 @@ import java.util.List;
 
 @Entity
 @Table(name="diagnosisPenyakit")
-public class DiagnosisPenyakitModel implements Serializable {
+public class DiagnosisPenyakitModel implements Serializable, Comparable<DiagnosisPenyakitModel> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -58,5 +58,10 @@ public class DiagnosisPenyakitModel implements Serializable {
 
     public void setListPasienDiagnosisPenyakit(List<PasienDiagnosisPenyakitModel> listPasienDiagnosisPenyakit) {
         this.listPasienDiagnosisPenyakit = listPasienDiagnosisPenyakit;
+    }
+
+    @Override
+    public int compareTo(DiagnosisPenyakitModel penyakitLain) {
+        return this.nama.compareTo(penyakitLain.nama);
     }
 }

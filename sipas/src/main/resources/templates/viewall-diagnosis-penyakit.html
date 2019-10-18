@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://wwww.thymelaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Diagnosis Penyakit</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<object th:replace="fragments/fragment :: navbar"></object>
+<div class="container p-5 text-center">
+    <h2>Sistem Informasi Pasien</h2>
+</div>
+<div class = "container">
+    <button class="btn btn-primary">
+        <a th:href="@{/diagnosis-penyakit/tambah/}" style="color: white"> Tambah Diagnosis Penyakit Baru </a>
+    </button>
+    <br>
+    <br>
+    <div class ="card">
+        <div class = "card-header bg-dark text-white">
+            Daftar Diagnosis Penyakit
+        </div>
+        <div class = "card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Kode</th>
+<!--                    <th>Jumlah Pasien Terdiagnosis</th>-->
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="penyakit, iterationStatus : *{listPenyakit}">
+                    <td th:text="${iterationStatus.count}"></td>
+                    <td th:text="${penyakit.nama}"></a></td>
+                    <td th:text="${penyakit.kode}"></td>
+<!--                    <td th:text="${penyakit.getEmergencyContact().getNoHp()}"></td>-->
+                    <td class="float-right">
+                        <a th:href="@{/diagnosis-penyakit?idDiagnosis=} + ${penyakit.id}" class="btn btn-sm btn-primary">Lihat</a>
+                        <a th:href="@{/}" class="btn btn-sm btn-dark">Ubah</a>
+                        <a th:href="@{/diagnosis-penyakit/hapus}" class="btn btn-sm btn-danger">Hapus</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+</div>
+</body>
+</html>
