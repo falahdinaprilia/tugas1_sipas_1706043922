@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://wwww.thymelaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Tambah Diagnosis Penyakit</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<object th:replace="fragments/fragment :: navbar"></object>
+<div class = "container-fluid">
+    <div class="row">
+        <div class="container p-5 text-center">
+            <h2>Tambah Data Riwayat Penyakit</h2>
+            <br>
+            <form th:action="@{/diagnosis-penyakit/tambah}" th:object="${penyakit}" method="POST">
+                <br>
+                <div class="row pt-1">
+                    <label class="col-sm-4">Nama</label>
+                    <input class="col-sm-7 form-control" type="text" name="nama" th:field="*{nama}"/>
+                    <br>
+                </div>
+                <br>
+                <div class="row pt-1">
+                    <label  class="col-sm-4">Kode</label>
+                    <input class="col-sm-7 form-control" type="text" name="kode" th:field="*{kode}" />
+                    <br>
+                </div>
+                <br>
+                <button class="col-sm-3 form-control btn btn-sm btn-primary" type="submit"> Submit </button>
+                <br>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</div>
+</body>
+</html>
