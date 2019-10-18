@@ -33,4 +33,14 @@ public class EmergencyContactServiceImpl implements EmergencyContactService {
         return emergencyContactDb.findAll();
     }
 
+    @Override
+    public EmergencyContactModel changeEmergency(EmergencyContactModel emergencyContact) {
+        EmergencyContactModel targetEmergency = emergencyContactDb.findById(emergencyContact.getId()).get();
+        targetEmergency.setNama(emergencyContact.getNama());
+        targetEmergency.setNik(emergencyContact.getNik());
+        targetEmergency.setNoHp(emergencyContact.getNoHp());
+        emergencyContactDb.save(targetEmergency);
+        return targetEmergency;
+    }
+
 }

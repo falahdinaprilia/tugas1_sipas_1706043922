@@ -70,7 +70,7 @@ public class PasienController {
 
     @RequestMapping(value = "/pasien/tambah", method = RequestMethod.POST)
     public String addPasienSubmit(@RequestParam (value = "asuransi") Long id, @ModelAttribute PasienModel pasien, Model model){
-        pasien.kodePasien(pasien);
+        pasienService.kodePasien(pasien);
         AsuransiModel asuransiPasien = asuransiService.getAsuransiById(id).get();
         List<AsuransiModel> listAsuransiPasien = new ArrayList<AsuransiModel>();
         listAsuransiPasien.add(asuransiPasien);
@@ -84,12 +84,27 @@ public class PasienController {
     }
 
     @RequestMapping(value = "/pasien", method = RequestMethod.GET, params = "nikPasien")
-        public String viewPasien(@RequestParam(value = "nikPasien") String nikPasien, Model model) {
+    public String viewPasien(@RequestParam(value = "nikPasien") String nikPasien, Model model) {
         PasienModel pasien = pasienService.getByNikPasien(nikPasien).get();
         model.addAttribute("pasien", pasien);
         model.addAttribute("listAsuransi", pasien.getListAsuransi());
         return "lihat-pasien";
     }
 
-    
+    @RequestMapping(value = "pasien/ubah/{nikPasien}", method = RequestMethod.GET)
+    public String ubahPasienForm(@PathVariable String nikPasien, Model model) {
+        PasienModel pasien = pasienService.getByNikPasien(nikPasien).get();
+        model.addAttribute("pasien", pasien);
+        return "form-ubah-pasien";
+    }
+
+    @RequestMapping(value = "pasien/ubah/{nikPasien}", method = RequestMethod.POST)
+    public String ubahPasienSubmit(@ModelAttribute PasienModel pasien, Model model) {
+        EmergencyContactModel emergency = emergencyContactService.changeEmergency(pasien.getEmergencyContact());
+        pasien.setEmergencyContact(emergency);
+        PasienModel pasienModel = pasienService.changePasien(pasien);
+        model.addAttribute("pasien", pasienModel);
+        model.addAttribute("emergency", emergency);
+        return "ubah-pasien";
+    }
 }

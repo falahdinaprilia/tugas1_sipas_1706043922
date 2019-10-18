@@ -152,24 +152,4 @@ public class PasienModel implements Serializable, Comparable<PasienModel> {
         return this.nama.compareTo(pasienLain.nama);
     }
 
-    public void kodePasien(PasienModel pasien) {
-        if (this.tanggalLahir != pasien.tanggalLahir) {
-            Date tanggalLahir = pasien.getTanggalLahir();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yy");
-            String strDate = dateFormat.format(tanggalLahir).replaceAll("-", "");
-            String kode = (LocalDateTime.now().getYear() + 5) + strDate + pasien.jenisKelamin +
-                    "ABCDEFGHIJKLMNOPQRSTUVWXYZ".charAt(new Random().nextInt(26)) +
-                    "ABCDEFGHIJKLMNOPQRSTUVWXYZ".charAt(new Random().nextInt(26));
-            pasien.setKode(kode);
-        } else {
-            Date tanggalLahir = pasien.getTanggalLahir();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yy");
-            String strDate = dateFormat.format(tanggalLahir).replaceAll("-", "");
-            String kode = (LocalDateTime.now().getYear() + 5) + strDate +
-                    "ABCDEFGHIJKLMNOPQRSTUVWXYZ".charAt(new Random().nextInt(26)) +
-                    "ABCDEFGHIJKLMNOPQRSTUVWXYZ".charAt(new Random().nextInt(26)) +
-                    "ABCDEFGHIJKLMNOPQRSTUVWXYZ".charAt(new Random().nextInt(26));
-            pasien.setKode(kode);
-        }
-    }
 }

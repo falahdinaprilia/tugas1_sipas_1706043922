@@ -10,5 +10,6 @@ public interface PasienService {
     void addPasien(PasienModel pasien);
     Optional<PasienModel> getByIdPasien(Long idPasien);
     Optional<PasienModel> getByNikPasien(String nikPasien);
-//    void kodePasien(PasienModel pasien);
+    PasienModel changePasien(PasienModel pasien);
+    void kodePasien(PasienModel pasien);
 }

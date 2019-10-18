@@ -10,4 +10,5 @@ public interface EmergencyContactService {
     Optional<EmergencyContactModel> getEmergencyById(Long idEmergency);
     void addEmergencyContact(EmergencyContactModel emergencyContact);
     List<EmergencyContactModel> getEmergencyList();
+    EmergencyContactModel changeEmergency(EmergencyContactModel emergencyContact);
 }

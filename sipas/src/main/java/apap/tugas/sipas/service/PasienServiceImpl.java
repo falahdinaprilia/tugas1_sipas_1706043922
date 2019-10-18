@@ -1,5 +1,6 @@
 package apap.tugas.sipas.service;
 
+import apap.tugas.sipas.model.EmergencyContactModel;
 import apap.tugas.sipas.model.PasienModel;
 import apap.tugas.sipas.repository.PasienDb;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,9 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @Service
 public class PasienServiceImpl implements PasienService {
@@ -35,6 +35,31 @@ public class PasienServiceImpl implements PasienService {
         return pasienDb.findByNik(nikPasien);
     }
 
+    @Override
+    public PasienModel changePasien(PasienModel pasien) {
+    PasienModel targetPasien = pasienDb.findById(pasien.getId()).get();
+    targetPasien.setNama(pasien.getNama());
+    targetPasien.setNik(pasien.getNik());
+    targetPasien.setJenisKelamin(pasien.getJenisKelamin());
+    targetPasien.setTempatLahir(pasien.getTempatLahir());
+    targetPasien.setTanggalLahir(pasien.getTanggalLahir());
+    if(pasien.getTanggalLahir() != targetPasien.getTanggalLahir()) {
+        kodePasien(targetPasien);
+    }
+        pasienDb.save(targetPasien);
+        return targetPasien;
+    }
+
+    public void kodePasien(PasienModel pasien) {
+        Date tanggalLahir = pasien.getTanggalLahir();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yy");
+        String strDate = dateFormat.format(tanggalLahir).replaceAll("-", "");
+        String kode = (LocalDateTime.now().getYear() + 5) + strDate + pasien.getJenisKelamin() +
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZ".charAt(new Random().nextInt(26)) +
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZ".charAt(new Random().nextInt(26));
+        pasien.setKode(kode);
+        }
+    }
 //    @Override
 //    public void kodePasien(PasienModel pasien) {
 //        if ()
@@ -52,4 +77,3 @@ public class PasienServiceImpl implements PasienService {
 //        String kode = Integer.toString(tahunLahir+5) + tanggalLahir + jenisKelamin + hurufRandom;
 //        pasien.setKode(kode);
 //    }
-}
