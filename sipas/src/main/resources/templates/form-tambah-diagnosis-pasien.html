@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://wwww.thymelaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tambah Diagnosis Pasien</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<object th:replace="fragments/fragment :: navbar"></object>
+<br>
+<div class = "container">
+<div class ="card">
+    <div class = "card-header bg-dark text-white">
+        <h4 th:text="'Detail Data Pasien - ' + ${pasien.nik}"></h4>
+    </div>
+    <div class = "card-body">
+        <table class="table">
+            <tbody>
+            <tr>
+                <td>NIK</td><td th:text="${pasien.nama}"></td>
+            </tr>
+            <tr>
+                <td>Nama Pasien</td><td th:text="${pasien.nik}"></td>
+            </tr>
+            <tr>
+                <td>Jenis Kelamin</td><td th:text="${pasien.kode}"></td>
+            </tr>
+            <tr>
+                <td>Jenis Kelamin</td><td th:text="${pasien.jenisKelamin}"></td>
+            </tr>
+            <tr>
+                <td>Tanggal Lahir</td><td th:text="${pasien.tanggalLahir}"></td>
+            </tr>
+            <tr>
+                <td>Alamat Pasien</td><td th:text="${pasien.tempatLahir}"></td>
+            </tr>
+            <tr>
+                <td>No HP</td><td th:text="${pasien.emergencyContact.nama} + ' - ' + ${pasien.emergencyContact.nik} + ' - ' + ${pasien.emergencyContact.noHp}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+<br>
+<div class = "container">
+    <div class ="card">
+        <div class = "card-header bg-dark text-white">
+            Diagnosis Penyakit Milik Pasien
+        </div>
+        <div class = "card-body">
+        <table class="table">
+        <tr>
+            <td><form th:action="@{/pasien/} + ${pasien.nik} + @{/tambah-diagnosis}" th:object="${pasienDiagnosis}" method="POST">
+            <br><div class="row pt-1">
+                <label  class="col-sm-4">Diagnosis Penyakit</label>
+                <select class ="col-sm-7 form-control" name="diagnosisPenyakit">
+                    <option selected="true" disabled="disabled" th:text="'-- Pilih Diagnosis Penyakit --'"></option>
+                    <option th:each="penyakit : ${listPenyakit}" th:value="${penyakit.id}" th:text="${penyakit.nama}"></option>
+                </select>
+                <button class="col-sm-3 form-control btn btn-sm btn-primary" type="submit"> Tambah Diagnosis Penyakit Pasien </button>
+            </div>
+        </form>
+            </td>
+        </tr>
+        </table>
+        </div>
+    </div>
+</div>
+<br>
+<div class = "container">
+    <div class ="card">
+        <div class = "card-header bg-dark text-white">
+            Diagnosis Penyakit Milik Pasien
+        </div>
+        <div class = "card-body">
+            <table class="table">
+                <tr th:each="diagnosis, iterationStatus : *{listPenyakitPasien}">
+                    <td th:text="${iterationStatus.count}"></td>
+                    <td th:text="${diagnosis.diagnosisPenyakit.getNama()}"></td>
+                    <td th:text="${diagnosis.tanggalDiagnosis}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<br>
+<a style="margin-left: 15%" th:href="@{/}" class="btn btn-sm btn-dark">Kembali ke Beranda</a>
+<br>
+</body>
+</html>

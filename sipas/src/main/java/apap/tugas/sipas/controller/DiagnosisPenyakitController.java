@@ -1,10 +1,8 @@
 package apap.tugas.sipas.controller;
 
 import apap.tugas.sipas.model.DiagnosisPenyakitModel;
-import apap.tugas.sipas.service.AsuransiService;
-import apap.tugas.sipas.service.DiagnosisPenyakitService;
-import apap.tugas.sipas.service.EmergencyContactService;
-import apap.tugas.sipas.service.PasienService;
+import apap.tugas.sipas.model.PasienModel;
+import apap.tugas.sipas.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -32,6 +30,9 @@ public class DiagnosisPenyakitController {
     @Autowired
     private DiagnosisPenyakitService diagnosisService;
 
+    @Autowired
+    private PasienDiagnosisPenyakitService pasienDiagnosisService;
+
     @RequestMapping(value = "/diagnosis-penyakit-all", method = RequestMethod.GET)
     public String viewallDiagnosis(Model model) {
         List<DiagnosisPenyakitModel> listPenyakit = diagnosisService.getLPenyakitList();
@@ -43,8 +44,9 @@ public class DiagnosisPenyakitController {
     @RequestMapping(value="/diagnosis-penyakit", method = RequestMethod.GET, params = "idDiagnosis")
     public String viewPenyakit(@RequestParam(value = "idDiagnosis") Long id, Model model) {
         DiagnosisPenyakitModel penyakit = diagnosisService.getPenyakitById(id).get();
+        List<PasienModel> listPasien = pasienDiagnosisService.getAllPasienByIdPenyakit(id);
         model.addAttribute("penyakit", penyakit);
-        model.addAttribute("listPasienDiagnosis", penyakit.getListPasienDiagnosisPenyakit());
+        model.addAttribute("listPasien", listPasien);
         return "lihat-penyakit";
     }
 

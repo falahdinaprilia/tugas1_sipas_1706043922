@@ -37,7 +37,7 @@
                     <td th:text="${iterationStatus.count}"></td>
                     <td th:text="${penyakit.nama}"></a></td>
                     <td th:text="${penyakit.kode}"></td>
-<!--                    <td th:text="${penyakit.getEmergencyContact().getNoHp()}"></td>-->
+<!--                    <td th:text="${listPasien.size()}"></td>-->
                     <td class="float-right">
                         <a th:href="@{/diagnosis-penyakit?idDiagnosis=} + ${penyakit.id}" class="btn btn-sm btn-primary">Lihat</a>
                         <a th:href="@{/}" class="btn btn-sm btn-dark">Ubah</a>

@@ -10,6 +10,5 @@ import java.util.Optional;
 public interface EmergencyContactDb extends JpaRepository<EmergencyContactModel, Long> {
     Optional<EmergencyContactModel> findById(Long idEmergencyContact);
     Optional<EmergencyContactModel> findByPasienId(Long pasienId);
-//    Optional<EmergencyContactModel> findByPasienId(Long idPasien);
 
 }

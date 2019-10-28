@@ -1,11 +1,7 @@
 package apap.tugas.sipas.controller;
 
-import apap.tugas.sipas.model.AsuransiModel;
-import apap.tugas.sipas.model.EmergencyContactModel;
-import apap.tugas.sipas.model.PasienModel;
-import apap.tugas.sipas.service.AsuransiService;
-import apap.tugas.sipas.service.EmergencyContactService;
-import apap.tugas.sipas.service.PasienService;
+import apap.tugas.sipas.model.*;
+import apap.tugas.sipas.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -31,6 +27,12 @@ public class PasienController {
     @Autowired
     private AsuransiService asuransiService;
 
+    @Autowired
+    private DiagnosisPenyakitService diagnosisService;
+
+    @Autowired
+    private PasienDiagnosisPenyakitService diagnosisPasienService;
+
 
     @RequestMapping(value= "/", method = RequestMethod.GET)
     public String beranda(Model model) {
@@ -38,15 +40,9 @@ public class PasienController {
         for (PasienModel pasien : listPasien) {
             pasien.getEmergencyContact().getNoHp();
         }
-//        List<EmergencyContactModel> listEmergency = emergencyContactService.getEmergencyList();
-//        String noHp;
-//        if (pasien.getIdEmergency().equals(emergency.getId())) {
-//            noHp = emergency.getNoHp();
-//        }
         Collections.sort(listPasien);
         model.addAttribute("pasienList", listPasien);
 
-//        String noEmergency = emergencyContactService.GetPasienByIdPasien(
         return "beranda";
     }
 
@@ -91,14 +87,14 @@ public class PasienController {
         return "lihat-pasien";
     }
 
-    @RequestMapping(value = "pasien/ubah/{nikPasien}", method = RequestMethod.GET)
+    @RequestMapping(value = "/pasien/ubah/{nikPasien}", method = RequestMethod.GET)
     public String ubahPasienForm(@PathVariable String nikPasien, Model model) {
         PasienModel pasien = pasienService.getByNikPasien(nikPasien).get();
         model.addAttribute("pasien", pasien);
         return "form-ubah-pasien";
     }
 
-    @RequestMapping(value = "pasien/ubah/{nikPasien}", method = RequestMethod.POST)
+    @RequestMapping(value = "/pasien/ubah/{nikPasien}", method = RequestMethod.POST)
     public String ubahPasienSubmit(@ModelAttribute PasienModel pasien, Model model) {
         EmergencyContactModel emergency = emergencyContactService.changeEmergency(pasien.getEmergencyContact());
         pasien.setEmergencyContact(emergency);
@@ -106,5 +102,26 @@ public class PasienController {
         model.addAttribute("pasien", pasienModel);
         model.addAttribute("emergency", emergency);
         return "ubah-pasien";
+    }
+
+    @RequestMapping(value = "/pasien/{nikPasien}/tambah-diagnosis", method = RequestMethod.GET)
+    public String tambahDiagnosis(@PathVariable String nikPasien, Model model) {
+        PasienModel pasien = pasienService.getByNikPasien(nikPasien).get();
+        PasienDiagnosisPenyakitModel pasienDiagnosis = new PasienDiagnosisPenyakitModel();
+        //        pasien.getListPasienDiagnosisPenyakit().add(pasienDiagnosis);
+        List<DiagnosisPenyakitModel> listDiagnosis = diagnosisService.getLPenyakitList();
+        model.addAttribute("pasien", pasien);
+        model.addAttribute("listAsuransi", pasien.getListAsuransi());
+        model.addAttribute("pasienDiagnosis", pasienDiagnosis);
+        model.addAttribute("listPenyakitPasien", pasien.getListPasienDiagnosisPenyakit());
+        model.addAttribute("listPenyakit", listDiagnosis);
+        return "form-tambah-diagnosis-pasien";
+    }
+
+    @RequestMapping(value = "/pasien/{nikPasien}/tambah-diagnosis", method = RequestMethod.POST)
+    public String tambahDiagnosis(@PathVariable String nikPasien, @ModelAttribute PasienDiagnosisPenyakitModel pasienDiagnosis, Model model) {
+        diagnosisPasienService.addDiagnosisPasien(pasienDiagnosis, nikPasien);
+        model.addAttribute("pasienDiagnosis", pasienDiagnosis);
+        return "tambah-diagnosis-pasien";
     }
 }

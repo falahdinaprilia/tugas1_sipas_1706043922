@@ -15,25 +15,34 @@
     <div class = "container">
         <div class ="card">
             <div class = "card-header bg-dark text-white">
-                Detail Data Pasien
+                <h4 th:text="'Detail Data Pasien - ' + ${pasien.nik}"></h4>
             </div>
             <div class = "card-body">
-
-                Nama
-                <p th:text="${pasien.nama}"></p>
-                NIK
-                <p th:text="${pasien.nik}"></p>
-                Kode
-                <p th:text="${pasien.kode}"></p>
-                Jenis Kelamin
-                <p th:text="${pasien.jenisKelamin}"></p>
-                Tanggal Lahir
-                <p th:text="${pasien.tanggalLahir}"></p>
-                Tempat Lahir
-                <p th:text="${pasien.tempatLahir}"></p>
-                Emergency Contact
-                <p th:text="${pasien.emergencyContact.nama} + ' - ' + ${pasien.emergencyContact.nik} + ' - ' + ${pasien.emergencyContact.noHp}"></p>
-
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td>NIK</td><td th:text="${pasien.nama}"></td>
+                    </tr>
+                    <tr>
+                        <td>Nama Pasien</td><td th:text="${pasien.nik}"></td>
+                    </tr>
+                    <tr>
+                        <td>Jenis Kelamin</td><td th:text="${pasien.kode}"></td>
+                    </tr>
+                    <tr>
+                        <td>Jenis Kelamin</td><td th:text="${pasien.jenisKelamin}"></td>
+                    </tr>
+                    <tr>
+                        <td>Tanggal Lahir</td><td th:text="${pasien.tanggalLahir}"></td>
+                    </tr>
+                    <tr>
+                        <td>Alamat Pasien</td><td th:text="${pasien.tempatLahir}"></td>
+                    </tr>
+                    <tr>
+                        <td>No HP</td><td th:text="${pasien.emergencyContact.nama} + ' - ' + ${pasien.emergencyContact.nik} + ' - ' + ${pasien.emergencyContact.noHp}"></td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -56,6 +65,5 @@
     <br>
     <a style="margin-left: 15%" th:href="@{/}" class="btn btn-sm btn-dark">Kembali ke Beranda</a>
     <br>
-    </div>
 </body>
 </html>

@@ -12,7 +12,7 @@
     <div class="container p-5 text-center">
         <h2>Sistem Informasi Pasien</h2>
     </div>
-    <div class = "container">
+    <div style="margin: 2%">
         <button class="btn btn-primary">
             <a th:href="@{/pasien/tambah/}" style="color: white"> Tambah Pasien Baru </a>
         </button>
@@ -50,9 +50,13 @@
                         <td th:text="${pasien.tanggalLahir}"></td>
                         <td th:text="${pasien.getEmergencyContact().getNoHp()}"></td>
                         <td class="float-right">
-                            <a th:href="@{/}" class="btn btn-sm btn-dark">Tambah Diagnosis</a>
+                            <button class="btn btn-dark">
+                                <a th:href="@{/pasien/} + ${pasien.nik} + @{/tambah-diagnosis}" style="color: white"> Tambah Diagnosis </a>
+                            </button>
                             <a th:href="@{/pasien?nikPasien=} + ${pasien.nik}" class="btn btn-sm btn-primary">Lihat</a>
                             <a th:href="@{/pasien/ubah/{nikPasien}(nikPasien= ${pasien.nik})}" class="btn btn-sm btn-dark">Ubah</a>
+                            <br>
+                            <br>
                             <a th:href="@{/}" class="btn btn-sm btn-danger">Hapus</a>
                         </td>
                     </tr>
