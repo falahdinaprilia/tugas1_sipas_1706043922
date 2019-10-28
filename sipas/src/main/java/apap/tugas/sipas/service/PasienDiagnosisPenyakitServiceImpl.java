@@ -38,7 +38,7 @@ public class PasienDiagnosisPenyakitServiceImpl implements PasienDiagnosisPenyak
 
     @Override
     public void addDiagnosisPasien(PasienDiagnosisPenyakitModel diagnosisPasien, String nikPasien) {
-        diagnosisPasien.setTanggalDiagnosis(Calendar.getInstance().getTime());
+        diagnosisPasien.setTanggalDiagnosis(java.sql.Date.valueOf(LocalDate.now()));
         diagnosisPasien.setPasien(pasienDb.findByNik(nikPasien).get());
         pasienDiagnosisPenyakitDb.save(diagnosisPasien);
     }

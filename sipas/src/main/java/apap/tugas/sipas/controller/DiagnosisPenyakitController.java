@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -35,7 +32,7 @@ public class DiagnosisPenyakitController {
 
     @RequestMapping(value = "/diagnosis-penyakit-all", method = RequestMethod.GET)
     public String viewallDiagnosis(Model model) {
-        List<DiagnosisPenyakitModel> listPenyakit = diagnosisService.getLPenyakitList();
+        List<DiagnosisPenyakitModel> listPenyakit = diagnosisService.getPenyakitList();
         Collections.sort(listPenyakit);
         model.addAttribute("listPenyakit", listPenyakit);
         return "viewall-diagnosis-penyakit";
@@ -64,6 +61,19 @@ public class DiagnosisPenyakitController {
         return "tambah-penyakit";
     }
 
+    @RequestMapping(value = "/diagnosis-penyakit/hapus/{id}")
+    public String hapusPenyakit(@PathVariable Long id, Model model) {
+        DiagnosisPenyakitModel penyakit = diagnosisService.getPenyakitById(id).get();
+        if(penyakit.getListPasienDiagnosisPenyakit().isEmpty()) {
+            model.addAttribute("penyakit", penyakit);
+            diagnosisService.deletePenyakit(penyakit);
+            return "penyakit-berhasil-dihapus";
+            }
+        else {
+            model.addAttribute("penyakit", penyakit);
+            return "penyakit-gagal-dihapus";
+        }
+    }
 
 
 }

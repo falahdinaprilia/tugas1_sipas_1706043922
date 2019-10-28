@@ -41,7 +41,7 @@
                     <td class="float-right">
                         <a th:href="@{/diagnosis-penyakit?idDiagnosis=} + ${penyakit.id}" class="btn btn-sm btn-primary">Lihat</a>
                         <a th:href="@{/}" class="btn btn-sm btn-dark">Ubah</a>
-                        <a th:href="@{/diagnosis-penyakit/hapus}" class="btn btn-sm btn-danger">Hapus</a>
+                        <a th:href="@{/diagnosis-penyakit/hapus/{id}(id = ${penyakit.id})}" class="btn btn-sm btn-danger">Hapus</a>
                     </td>
                 </tr>
                 </tbody>

@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface DiagnosisPenyakitService {
-    List<DiagnosisPenyakitModel> getLPenyakitList();
+    List<DiagnosisPenyakitModel> getPenyakitList();
     Optional<DiagnosisPenyakitModel> getPenyakitById(Long idDiagnosis);
     void addPenyakit(DiagnosisPenyakitModel penyakit);
+    void deletePenyakit(DiagnosisPenyakitModel penyakit);
 }

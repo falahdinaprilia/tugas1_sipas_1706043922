@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -64,13 +66,33 @@ public class PasienController {
         return "form-tambah-pasien";
     }
 
+    @RequestMapping(value = "/pasien/tambah", method = RequestMethod.POST, params={"addRow"})
+    public String addRow(@ModelAttribute PasienModel pasien, Model model) {
+        AsuransiModel asuransi = new AsuransiModel();
+        pasien.getListAsuransi().add(asuransi);
+        List<AsuransiModel> listAllAsuransi = asuransiService.getAsuransiList();
+        model.addAttribute("allAsuransiList", listAllAsuransi);
+        model.addAttribute("pasien", pasien);
+        return "form-tambah-pasien";
+    }
+
+    @RequestMapping(value = "/pasien/tambah", method = RequestMethod.POST, params={"removeRow"})
+    public String removeRow(@ModelAttribute PasienModel pasien, Model model, HttpServletRequest req) {
+        Integer rowId =  Integer.valueOf(req.getParameter("removeRow"));
+        pasien.getListAsuransi().remove(rowId.intValue());
+        model.addAttribute("pasien", pasien);
+        List<AsuransiModel> listAllAsuransi = asuransiService.getAsuransiList();
+        model.addAttribute("allAsuransiList", listAllAsuransi);
+        return "form-tambah-pasien";
+    }
+
     @RequestMapping(value = "/pasien/tambah", method = RequestMethod.POST)
-    public String addPasienSubmit(@RequestParam (value = "asuransi") Long id, @ModelAttribute PasienModel pasien, Model model){
+    public String addPasienSubmit(@ModelAttribute PasienModel pasien, ModelMap model){
         pasienService.kodePasien(pasien);
-        AsuransiModel asuransiPasien = asuransiService.getAsuransiById(id).get();
-        List<AsuransiModel> listAsuransiPasien = new ArrayList<AsuransiModel>();
-        listAsuransiPasien.add(asuransiPasien);
-        pasien.setListAsuransi(listAsuransiPasien);
+//        AsuransiModel asuransiPasien = asuransiService.getAsuransiById(id).get();
+//        List<AsuransiModel> listAsuransiPasien = new ArrayList<AsuransiModel>();
+//        listAsuransiPasien.add(asuransiPasien);
+//        pasien.setListAsuransi(listAsuransiPasien);
         emergencyContactService.addEmergencyContact(pasien.getEmergencyContact());
         pasienService.addPasien(pasien);
         model.addAttribute("kodePasien", pasien.getKode());
@@ -109,7 +131,7 @@ public class PasienController {
         PasienModel pasien = pasienService.getByNikPasien(nikPasien).get();
         PasienDiagnosisPenyakitModel pasienDiagnosis = new PasienDiagnosisPenyakitModel();
         //        pasien.getListPasienDiagnosisPenyakit().add(pasienDiagnosis);
-        List<DiagnosisPenyakitModel> listDiagnosis = diagnosisService.getLPenyakitList();
+        List<DiagnosisPenyakitModel> listDiagnosis = diagnosisService.getPenyakitList();
         model.addAttribute("pasien", pasien);
         model.addAttribute("listAsuransi", pasien.getListAsuransi());
         model.addAttribute("pasienDiagnosis", pasienDiagnosis);

@@ -50,9 +50,7 @@
                         <td th:text="${pasien.tanggalLahir}"></td>
                         <td th:text="${pasien.getEmergencyContact().getNoHp()}"></td>
                         <td class="float-right">
-                            <button class="btn btn-dark">
-                                <a th:href="@{/pasien/} + ${pasien.nik} + @{/tambah-diagnosis}" style="color: white"> Tambah Diagnosis </a>
-                            </button>
+                            <a th:href="@{/pasien/} + ${pasien.nik} + @{/tambah-diagnosis}" class="btn btn-sm btn-dark"> Tambah Diagnosis </a>
                             <a th:href="@{/pasien?nikPasien=} + ${pasien.nik}" class="btn btn-sm btn-primary">Lihat</a>
                             <a th:href="@{/pasien/ubah/{nikPasien}(nikPasien= ${pasien.nik})}" class="btn btn-sm btn-dark">Ubah</a>
                             <br>

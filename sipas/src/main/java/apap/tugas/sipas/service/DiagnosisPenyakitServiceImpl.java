@@ -13,7 +13,7 @@ public class DiagnosisPenyakitServiceImpl implements DiagnosisPenyakitService {
     @Autowired
     private DiagnosisPenyakitDb diagnosisPenyakitDb;
     @Override
-    public List<DiagnosisPenyakitModel> getLPenyakitList() {
+    public List<DiagnosisPenyakitModel> getPenyakitList() {
         return diagnosisPenyakitDb.findAll();
     }
 
@@ -25,5 +25,10 @@ public class DiagnosisPenyakitServiceImpl implements DiagnosisPenyakitService {
     @Override
     public void addPenyakit(DiagnosisPenyakitModel penyakit) {
         diagnosisPenyakitDb.save(penyakit);
+    }
+
+    @Override
+    public void deletePenyakit(DiagnosisPenyakitModel penyakit) {
+        diagnosisPenyakitDb.delete(penyakit);
     }
 }

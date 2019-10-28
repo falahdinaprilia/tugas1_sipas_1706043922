@@ -44,17 +44,18 @@
                     <input class="col-sm-7 form-control" type="date" name="tanggalLahir" th:field="*{tanggalLahir}"/>
                     <br>
                 </div>
-                <div class="row pt-1">
-                    <label  class="col-sm-4">Asuransi</label>
-                        <select class ="col-sm-7 form-control" name="asuransi">
-<!--                            th:each="asuransiPasien, rowStat : *{asuransiList}"
-                                th:field="*{asuransiList[__${rowStat.index}__].asuransi"-->
-<!--                            <option th:value="'${rowStat.index}'" selected></option>-->
+                <div class="row pt-1" th:each="asuransi, rowStat : *{listAsuransi}">
+                    <label  for="asuransi" class="col-sm-4">Asuransi</label>
+                        <select class ="col-sm-7 form-control" name="asuransi" id="asuransi" th:field="*{listAsuransi[__${rowStat.index}__].id}" required="true">
+<!--                                th:each="asuransiPasien, rowStat : *{listAsuransi}"-->
+
+                            <option th:value="${rowStat.index}" th:text="'-- Pilih Asuransi --'" selected></option>
                             <option th:each="asuransi : ${allAsuransiList}" th:value="${asuransi.id}" th:text="${asuransi.nama}"></option>
                         </select>
+                    <button type="submit" class="btn btn-danger" name="removeRow" th:value="${rowStat.index}"><i class="fa fa-trash">Delete Row</i></button></th>
                 </div>
                 <br>
-                <a class=" col-sm-3 form-control btn btn-sm btn-dark" th:href="@{/}">Tambah Asuransi</a>
+                <button type="submit" class="col-sm-3 form-control btn btn-sm btn-dark" name="addRow"><i class="fa fa-trash">Tambah Asuransi</i></button></th>
                 <br>
                 <br>
                 <div class="row pt-1">
