@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gagal</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<object th:replace="fragments/fragment :: navbar"></object>
+<div class="jumbotron">
+    <div class="container p-5 text-center">
+        <img src="https://image.flaticon.com/icons/svg/1832/1832382.svg" width="15%">
+        <br>
+        <h2 th:text="'Pasien dengan NIK ' + ${pasien.nik} + ' sudah ada sebelumnya!'"></h2>
+    </div>
+</div>
+<br>
+<object th:replace="fragments/fragment :: footer"></object>
+
+</body>
+</html>

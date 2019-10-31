@@ -89,6 +89,12 @@ public class PasienController {
 
     @RequestMapping(value = "/pasien/tambah", method = RequestMethod.POST)
     public String addPasienSubmit(@ModelAttribute PasienModel pasien, ModelMap model){
+        for (PasienModel p : pasienService.getPasienList()) {
+            if (p.getNik().equals(pasien.getNik())) {
+                model.addAttribute("pasien", pasien);
+                return "duplikat-nik";
+            }
+        }
         pasienService.kodePasien(pasien);
 //        AsuransiModel asuransiPasien = asuransiService.getAsuransiById(id).get();
 //        List<AsuransiModel> listAsuransiPasien = new ArrayList<AsuransiModel>();

@@ -63,6 +63,12 @@ public class DiagnosisPenyakitController {
 
     @RequestMapping(value = "/diagnosis-penyakit/tambah", method = RequestMethod.POST)
     public String tambahpenyakitsubmit(@ModelAttribute DiagnosisPenyakitModel penyakit, Model model) {
+        for (DiagnosisPenyakitModel d : diagnosisService.getPenyakitList()) {
+            if ( d.getKode().equals(penyakit.getKode()) || d.getNama().equals(penyakit.getNama())) {
+                model.addAttribute("penyakit", penyakit);
+                return "duplikat-penyakit";
+            }
+        }
         diagnosisService.addPenyakit(penyakit);
         model.addAttribute("penyakit", penyakit);
         return "tambah-penyakit";
