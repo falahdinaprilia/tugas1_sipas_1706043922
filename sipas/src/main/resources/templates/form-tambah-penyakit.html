@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://wwww.thymelaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Form Tambah Diagnosis Penyakit</title>
@@ -18,13 +18,13 @@
                 <br>
                 <div class="row pt-1">
                     <label class="col-sm-4">Nama</label>
-                    <input class="col-sm-7 form-control" type="text" name="nama" th:field="*{nama}"/>
+                    <input class="col-sm-7 form-control" type="text" name="nama" th:field="*{nama}" required="true"/>
                     <br>
                 </div>
                 <br>
                 <div class="row pt-1">
                     <label  class="col-sm-4">Kode</label>
-                    <input class="col-sm-7 form-control" type="text" name="kode" th:field="*{kode}" />
+                    <input class="col-sm-7 form-control" type="text" name="kode" th:field="*{kode}" required="true"/>
                     <br>
                 </div>
                 <br>
@@ -34,8 +34,8 @@
         </div>
     </div>
 </div>
+<br>
+<object th:replace="fragments/fragment :: footer"></object>
 
-
-</div>
 </body>
 </html>

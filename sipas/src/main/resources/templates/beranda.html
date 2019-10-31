@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://wwww.thymelaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Beranda</title>
@@ -9,21 +9,25 @@
 </head>
 <body>
     <object th:replace="fragments/fragment :: navbar"></object>
+    <div class="jumbotron">
     <div class="container p-5 text-center">
-        <h2>Sistem Informasi Pasien</h2>
-    </div>
-    <div style="margin: 2%">
+        <img src="https://image.flaticon.com/icons/svg/706/706184.svg" width="20%">
+        <h2><b>Sistem Informasi Pasien</b></h2>
+        <h5>Selamat datang di Sistem Informasi Pasien Rumah Sakit Uni.</h5>
+        <br>
         <button class="btn btn-primary">
             <a th:href="@{/pasien/tambah/}" style="color: white"> Tambah Pasien Baru </a>
         </button>
-        <br>
+    </div>
+    </div>
+    <div style="margin: 2%">
         <br>
         <div class ="card">
             <div class = "card-header bg-dark text-white">
                 Daftar Pasien
             </div>
             <div class = "card-body">
-                <table class="table">
+                <table class="table table-responsive">
                     <thead>
                     <tr>
                         <th>No</th>
@@ -34,11 +38,15 @@
                         <th>Tempat Lahir</th>
                         <th>Tanggal Lahir</th>
                         <th>Telepon Emergency Contact</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="pasien, iterationStatus : *{pasienList}">
-                        <td th:text="${iterationStatus.count}"></td>
+                        <th scope="row" th:text="${iterationStatus.count}"></th>
                         <td th:text="${pasien.nama}"></a></td>
                         <td th:text="${pasien.nik}"></td>
                         <td>
@@ -47,15 +55,27 @@
                         </td>
                         <td th:text="${pasien.kode}"></td>
                         <td th:text="${pasien.tempatLahir}"></td>
-                        <td th:text="${pasien.tanggalLahir}"></td>
+                        <td th:text="${#dates.format(pasien.tanggalLahir, 'yyyy-MM-dd')}"></td>
                         <td th:text="${pasien.getEmergencyContact().getNoHp()}"></td>
-                        <td class="float-right">
-                            <a th:href="@{/pasien/} + ${pasien.nik} + @{/tambah-diagnosis}" class="btn btn-sm btn-dark"> Tambah Diagnosis </a>
-                            <a th:href="@{/pasien?nikPasien=} + ${pasien.nik}" class="btn btn-sm btn-primary">Lihat</a>
-                            <a th:href="@{/pasien/ubah/{nikPasien}(nikPasien= ${pasien.nik})}" class="btn btn-sm btn-dark">Ubah</a>
-                            <br>
-                            <br>
-                            <a th:href="@{/}" class="btn btn-sm btn-danger">Hapus</a>
+                        <td scope="col" style="text-align: left">
+                            <button class="btn btn-dark">
+                            <a th:href="@{/pasien/} + ${pasien.nik} + @{/tambah-diagnosis}" style="color: white">Tambah Diagnosis</a>
+                            </button>
+                        </td>
+                        <td scope="col" style="text-align: left">
+                            <button class="btn btn-info">
+                            <a th:href="@{/pasien?nikPasien=} + ${pasien.nik}" style="color: white">Lihat</a>
+                            </button>
+                        </td>
+                        <td scope="col" style="text-align: left">
+                            <button class="btn btn-primary">
+                            <a th:href="@{/pasien/ubah/{nikPasien}(nikPasien= ${pasien.nik})} " style="color: white">Ubah</a>
+                            </button>
+                        </td>
+                        <td scope="col" style="text-align: left">
+                            <button class="btn btn-danger">
+                            <a th:href="@{/}" style="color: white"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                            </button>
                         </td>
                     </tr>
                     </tbody>
@@ -63,8 +83,6 @@
             </div>
         </div>
     </div>
-
-
-</div>
+<object th:replace="fragments/fragment :: footer"></object>
 </body>
 </html>

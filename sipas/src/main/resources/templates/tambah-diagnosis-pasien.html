@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://wwww.thymelaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Tambah Diagnosis Pasien</title>
@@ -9,9 +9,17 @@
 </head>
 <body>
 <object th:replace="fragments/fragment :: navbar"></object>
-<div class="container p-5 text-center">
-    <h2 th:text="'Diagnosis Penyakit ' + ${pasienDiagnosis.diagnosisPenyakit.getNama()} + ' berhasil ditambahkan ke pasien ' + ${pasienDiagnosis.pasien.getNama()} + ' pada tanggal ' + ${pasienDiagnosis.tanggalDiagnosis}"></h2>
+<div class="jumbotron">
+    <div class="container p-5 text-center">
+        <img src="https://image.flaticon.com/icons/svg/190/190411.svg" width="10%">
+        <br>
+        <br>
+        <h2 th:text="'Diagnosis Penyakit ' + ${pasienDiagnosis.diagnosisPenyakit.getNama()} + ' berhasil ditambahkan ke pasien ' + ${pasienDiagnosis.pasien.getNama()} + ' pada tanggal ' + ${pasienDiagnosis.tanggalDiagnosis}"></h2>
+</div>
 </div>
 <a style="margin-left: 15%" th:href="@{/}" class="btn btn-sm btn-dark">Kembali ke Beranda</a>
+<br>
+<object th:replace="fragments/fragment :: footer"></object>
+
 </body>
 </html>

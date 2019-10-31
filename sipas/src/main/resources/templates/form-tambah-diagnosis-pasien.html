@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://wwww.thymelaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Tambah Diagnosis Pasien</title>
@@ -56,10 +56,11 @@
             <td><form th:action="@{/pasien/} + ${pasien.nik} + @{/tambah-diagnosis}" th:object="${pasienDiagnosis}" method="POST">
             <br><div class="row pt-1">
                 <label  class="col-sm-4">Diagnosis Penyakit</label>
-                <select class ="col-sm-7 form-control" name="diagnosisPenyakit">
+                <select class ="col-sm-7 form-control" name="diagnosisPenyakit" required="true">
                     <option selected="true" disabled="disabled" th:text="'-- Pilih Diagnosis Penyakit --'"></option>
                     <option th:each="penyakit : ${listPenyakit}" th:value="${penyakit.id}" th:text="${penyakit.nama}"></option>
                 </select>
+                <br>
                 <button class="col-sm-3 form-control btn btn-sm btn-primary" type="submit"> Tambah Diagnosis Penyakit Pasien </button>
             </div>
         </form>
@@ -77,11 +78,20 @@
         </div>
         <div class = "card-body">
             <table class="table">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Nama</th>
+                        <th>Tanggal Terdiagnosis</th>
+                    </tr>
+                </thead>
+                <tbody>
                 <tr th:each="diagnosis, iterationStatus : *{listPenyakitPasien}">
                     <td th:text="${iterationStatus.count}"></td>
                     <td th:text="${diagnosis.diagnosisPenyakit.getNama()}"></td>
                     <td th:text="${diagnosis.tanggalDiagnosis}"></td>
                 </tr>
+                </tbody>
             </table>
         </div>
     </div>
@@ -90,5 +100,7 @@
 <br>
 <a style="margin-left: 15%" th:href="@{/}" class="btn btn-sm btn-dark">Kembali ke Beranda</a>
 <br>
+<object th:replace="fragments/fragment :: footer"></object>
+
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://wwww.thymelaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>500 Internal Error</title>
@@ -9,8 +9,16 @@
 </head>
 <body>
 <object th:replace="fragments/fragment :: navbar"></object>
-<div class="container p-5 text-center">
-<h2>Internal Error!</h2>
+<div class="jumbotron">
+    <div class="container p-5 text-center">
+        <img src="https://image.flaticon.com/icons/svg/124/124131.svg" width="20%">
+        <br>
+        <h2><b>Terjadi Internal Error!</b></h2>
+        <h5>Ini bukan salahmu</h5>
+    </div>
 </div>
+<br>
+<object th:replace="fragments/fragment :: footer"></object>
+
 </body>
 </html>

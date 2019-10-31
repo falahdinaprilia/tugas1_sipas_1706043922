@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://wwww.thymelaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Form Ubah Pasien</title>
@@ -19,17 +19,17 @@
         <input type="hidden" th:field="${pasien.id}"/>
         <div class="row pt-1">
             <label class="col-sm-4">Nama</label>
-            <input class="col-sm-7 form-control" type="text" name="nama" th:field="*{nama}"/>
+            <input class="col-sm-7 form-control" type="text" name="nama" th:field="*{nama}" required="true"/>
             <br>
         </div>
         <div class="row pt-1">
             <label  class="col-sm-4">NIK</label>
-            <input class="col-sm-7 form-control" type="text" name="nik" th:field="*{nik}" />
+            <input class="col-sm-7 form-control" type="text" name="nik" th:field="*{nik}" required="true"/>
             <br>
         </div>
         <div class="row pt-1">
             <label  class="col-sm-4">Jenis Kelamin</label>
-            <select class="col-sm-7 form-control"  th:field="*{jenisKelamin}" th:value="*{jenisKelamin}">
+            <select class="col-sm-7 form-control"  th:field="*{jenisKelamin}" th:value="*{jenisKelamin}" required="true">
                 <option th:value="'1'" th:text="Laki-laki"></option>
                 <option th:value="'2'" th:text="Perempuan"></option>
             </select>
@@ -37,41 +37,29 @@
         </div>
         <div class="row pt-1">
             <label  class="col-sm-4">Tempat Lahir</label>
-            <input class="col-sm-7 form-control"  type="text" name="tempatLahir" th:field="*{tempatLahir}"/>
+            <input class="col-sm-7 form-control"  type="text" name="tempatLahir" th:field="*{tempatLahir}" required="true"/>
             <br>
         </div>
         <div class="row pt-1">
             <label  class="col-sm-4">Tanggal Lahir</label>
-            <input class="col-sm-7 form-control" type="date" name="tanggalLahir" th:field="*{tanggalLahir}" th:value="*{tanggalLahir}"/>
+            <input class="col-sm-7 form-control" type="date" name="tanggalLahir" th:field="*{tanggalLahir}" th:value="*{tanggalLahir}" required="true"/>
             <br>
         </div>
-<!--        <div class="row pt-1">-->
-<!--            <label  class="col-sm-4">Asuransi</label>-->
-<!--            <select class ="col-sm-7 form-control" name="asuransi">-->
-<!--                &lt;!&ndash;                            th:each="asuransiPasien, rowStat : *{asuransiList}"-->
-<!--                                                th:field="*{asuransiList[__${rowStat.index}__].asuransi"&ndash;&gt;-->
-<!--                &lt;!&ndash;                            <option th:value="'${rowStat.index}'" selected></option>&ndash;&gt;-->
-<!--                <option th:each="asuransi : ${allAsuransiList}" th:value="${asuransi.id}" th:text="${asuransi.nama}"></option>-->
-<!--            </select>-->
-<!--        </div>-->
-<!--        <br>-->
-<!--        <a class=" col-sm-3 form-control btn btn-sm btn-dark" th:href="@{/}">Tambah Asuransi</a>-->
-<!--        <br>-->
         <br>
         <input type="hidden" th:field="*{emergencyContact.id}"/>
         <div class="row pt-1">
             <label  class="col-sm-4">Emergency Contact Name</label>
-            <input class="col-sm-7 form-control" type="text" name="nama" th:field="*{emergencyContact.nama}"/>
+            <input class="col-sm-7 form-control" type="text" name="nama" th:field="*{emergencyContact.nama}" required="true"/>
             <br>
         </div>
         <div class="row pt-1">
             <label  class="col-sm-4">Emergency Contact NIK</label>
-            <input class="col-sm-7 form-control" type="text" name="nik" th:field="*{emergencyContact.nik}"/>
+            <input class="col-sm-7 form-control" type="text" name="nik" th:field="*{emergencyContact.nik}" required="true"/>
             <br>
         </div>
         <div class="row pt-1">
             <label  class="col-sm-4">Emergency Contact Phone</label>
-            <input class="col-sm-7 form-control" type="text" name="noHp" th:field="*{emergencyContact.noHp}"/>
+            <input class="col-sm-7 form-control" type="text" name="noHp" th:field="*{emergencyContact.noHp}" required="true"/>
             <br>
         </div>
         <br>
@@ -81,6 +69,8 @@
     </div>
     </div>
 </div>
+<br>
+<object th:replace="fragments/fragment :: footer"></object>
 
 </body>
 </html>

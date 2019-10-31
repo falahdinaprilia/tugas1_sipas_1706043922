@@ -9,7 +9,8 @@ import java.util.Optional;
 
 @Repository
 public interface PasienDiagnosisPenyakitDb extends JpaRepository<PasienDiagnosisPenyakitModel, Long> {
-    List<PasienDiagnosisPenyakitModel> findByPasienId(Long idPasien);
+    List<PasienDiagnosisPenyakitModel> findByPasienNik(String nikPasien);
     List<PasienDiagnosisPenyakitModel> findByDiagnosisPenyakitId(Long idPenyakit);
+//    List<PasienDiagnosisPenyakitModel> findByPasienListAsuransiIdAndDiagnosisPenyakitId(Long idAsuransi, Long idDiagnosis);
 
 }

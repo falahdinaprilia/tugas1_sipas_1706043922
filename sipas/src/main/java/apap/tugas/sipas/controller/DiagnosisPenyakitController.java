@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -33,8 +34,14 @@ public class DiagnosisPenyakitController {
     @RequestMapping(value = "/diagnosis-penyakit-all", method = RequestMethod.GET)
     public String viewallDiagnosis(Model model) {
         List<DiagnosisPenyakitModel> listPenyakit = diagnosisService.getPenyakitList();
+        List<Integer> listPasien = new ArrayList<>();
+        for (DiagnosisPenyakitModel penyakit : listPenyakit) {
+            Long id = penyakit.getId();
+            listPasien.add(pasienDiagnosisService.getAllPasienByIdPenyakit(id).size());
+        }
         Collections.sort(listPenyakit);
         model.addAttribute("listPenyakit", listPenyakit);
+        model.addAttribute("listPasien", listPasien);
         return "viewall-diagnosis-penyakit";
     }
 

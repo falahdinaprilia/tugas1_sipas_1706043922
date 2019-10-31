@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://wwww.thymelaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Detail Data Pasien</title>
@@ -9,8 +9,11 @@
 </head>
 <body>
     <object th:replace="fragments/fragment :: navbar"></object>
+    <div class="jumbotron">
+
     <div class="container p-5 text-center">
         <h2>Detail Pasien</h2>
+    </div>
     </div>
     <div class = "container">
         <div class ="card">
@@ -33,7 +36,7 @@
                         <td>Jenis Kelamin</td><td th:text="${pasien.jenisKelamin}"></td>
                     </tr>
                     <tr>
-                        <td>Tanggal Lahir</td><td th:text="${pasien.tanggalLahir}"></td>
+                        <td>Tanggal Lahir</td><td th:text="${#dates.format(pasien.tanggalLahir, 'yyyy-MM-dd')}"></td>
                     </tr>
                     <tr>
                         <td>Alamat Pasien</td><td th:text="${pasien.tempatLahir}"></td>
@@ -65,5 +68,7 @@
     <br>
     <a style="margin-left: 15%" th:href="@{/}" class="btn btn-sm btn-dark">Kembali ke Beranda</a>
     <br>
+    <object th:replace="fragments/fragment :: footer"></object>
+
 </body>
 </html>

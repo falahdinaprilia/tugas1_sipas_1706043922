@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://wwww.thymelaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Detail Data Diagnosis Penyakit</title>
@@ -9,43 +9,52 @@
 </head>
 <body>
 <object th:replace="fragments/fragment :: navbar"></object>
+<div class="jumbotron">
+
 <div class="container p-5 text-center">
     <h2>Detail Data Diagnosis Penyakit</h2>
 </div>
-<div class = "container">
+</div>
+    <div class = "container">
     <div class ="card">
         <div class = "card-header bg-dark text-white">
             Detail Data Pasien
         </div>
         <div class = "card-body">
-
-            Nama
-            <p th:text="${penyakit.nama}"></p>
-            Kode
-            <p th:text="${penyakit.kode}"></p>
-
+            <table class="table">
+                <tbody>
+                <tr>
+                    <td><b>Nama</b></td><td th:text="${penyakit.nama}"></td>
+                </tr>
+                <tr>
+                    <td><b>Kode</b></td><td th:text="${penyakit.kode}"></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
-
+<br>
 <div class = "container">
     <div class ="card">
         <div class = "card-header bg-dark text-white">
             Pasien yang Terdiagnosis
         </div>
         <div class = "card-body">
-<!--            <table class="table">-->
-<!--                <tr th:each="pasien, iterationStatus : *{listAsuransi}">-->
-<!--                    <td th:text="${iterationStatus.count}"></td>-->
-<!--                    <td th:text="${pasien.nama}"></td>-->
-<!--                </tr>-->
-<!--            </table>-->
+            <table class="table">
+                <tr th:each="pasien, iterationStatus : *{listPasien}">
+                    <td th:text="${iterationStatus.count}"></td>
+                    <td th:text="${pasien.nama} + ' - Kode: ' + ${pasien.kode}"></td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
 <br>
 <a style="margin-left: 15%" th:href="@{/}" class="btn btn-sm btn-dark">Kembali ke Beranda</a>
 <br>
-</div>
+<br>
+<object th:replace="fragments/fragment :: footer"></object>
+
 </body>
 </html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Cari Pasien</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<object th:replace="fragments/fragment :: navbar"></object>
+<div class="jumbotron">
+<div class="container p-5 text-center">
+    <h2>Detail Pasien</h2>
+</div>
+</div>
+<div class = "container">
+    <div class ="card">
+        <div class = "card-header bg-dark text-white">
+            Filter
+        </div>
+        <form th:action="@{/pasien/cari}" method="GET">
+        <div class = "card-body">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <td>
+                        <select class ="form-control" name="idAsuransi" id="asuransi" required="true">
+                            <option th:text="'-- Pilih Asuransi --'" disabled="disabled" selected></option>
+                            <option th:each="asuransi : ${listAsuransi}" th:value="${asuransi.id}" th:text="${asuransi.nama}"></option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class ="form-control" name="idDiagnosis" id="penyakit" required="true">
+                            <option th:text="'-- Pilih Diagnosis Penyakit --'" disabled="disabled" selected></option>
+                            <option th:each="penyakit : ${listPenyakit}" th:value="${penyakit.id}" th:text="${penyakit.nama}"></option>
+                        </select>
+                    </td>
+                    <td>
+                        <button class="form-control btn btn-sm btn-primary" type="submit"> Cari Pasien </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        </form>
+    </div>
+</div>
+<br>
+<div class = "container">
+    <div class ="card">
+        <div class = "card-header bg-dark text-white">
+            Daftar Pasien
+        </div>
+        <div class = "card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>NIK</th>
+                    <th>Jenis Kelamin</th>
+                    <th>Kode Pasien</th>
+                    <th>Tempat Lahir</th>
+                    <th>Tanggal Lahir</th>
+                    <th>Telepon Emergency Contact</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="pasien, iterationStatus : *{listPasien}">
+                    <td th:text="${iterationStatus.count}"></td>
+                    <td th:text="${pasien.getNama()}"></td>
+                    <td th:text="${pasien.getNik()}"></td>
+                    <td>
+                        <span th:if="${pasien.jenisKelamin == 1}">Laki-laki</span>
+                        <span th:unless="${pasien.jenisKelamin == 1}">Perempuan</span>
+                    </td>
+                    <td th:text="${pasien.getKode()}"></td>
+                    <td th:text="${pasien.getTempatLahir()}"></td>
+                    <td th:text="${#dates.format(pasien.tanggalLahir, 'yyyy-MM-dd')}"></td>
+                    <td th:text="${pasien.getEmergencyContact().getNoHp()}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<br>
+<object th:replace="fragments/fragment :: footer"></object>
+</body>
+</html>

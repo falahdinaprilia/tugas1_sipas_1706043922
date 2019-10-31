@@ -42,8 +42,8 @@ public class PasienServiceImpl implements PasienService {
     targetPasien.setNik(pasien.getNik());
     targetPasien.setJenisKelamin(pasien.getJenisKelamin());
     targetPasien.setTempatLahir(pasien.getTempatLahir());
-    targetPasien.setTanggalLahir(pasien.getTanggalLahir());
     if(pasien.getTanggalLahir() != targetPasien.getTanggalLahir()) {
+        targetPasien.setTanggalLahir(pasien.getTanggalLahir());
         kodePasien(targetPasien);
     }
         pasienDb.save(targetPasien);

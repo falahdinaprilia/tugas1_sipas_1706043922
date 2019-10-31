@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://wwww.thymelaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
     <head th:fragment="css">
         <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
 
     <head th:fragment="js">
@@ -31,9 +32,18 @@
         <div class="navbar-nav">
             <a class="nav-item nav-link active" th:href="@{/}">Beranda<span class="sr-only">(current)</span></a>
             <a class="nav-item nav-link active" th:href="@{/diagnosis-penyakit-all}">Diagnosis Penyakit<span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link active" th:href="@{/}">Cari Pasien<span class="sr-only">(current)</span></a>
+<!--            <a class="nav-item nav-link active" th:href="@{/pasien/cari}">Cari Pasien<span class="sr-only">(current)</span></a>-->
+            <li class="dropdown navbar-item nav-link active">
+                <a class="dropdown-toggle" data-toggle="dropdown">Cari Pasien <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" th:href="@{/pasien/cari}">Cari Pasien berdasarkan Asuransi dan Diagnosis Penyakit</a></li>
+                    <li><a class="dropdown-item" th:href="@{/pasien/cari/lakilaki-perempuan}"> Cari Pasien berdasarkan Gender </a></li>
+                </ul>
+            </li>
         </div>
     </div>
 </nav>
+<footer th:fragment="footer" style="text-align: center;color: white;background:black;padding: 2%">
+    &copy; 2019. Falahdina Aprilia. APAP - C</footer>
 </body>
 </html>

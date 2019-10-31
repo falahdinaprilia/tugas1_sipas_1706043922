@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://wwww.thymelaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
         <meta charset="UTF-8">
         <title>404 Not Found</title>
@@ -9,8 +9,15 @@
     </head>
     <body>
     <object th:replace="fragments/fragment :: navbar"></object>
+    <div class="jumbotron">
     <div class="container p-5 text-center">
-    <h2>Halaman tidak ditemukan!</h2>
+        <img src="https://image.flaticon.com/icons/svg/2157/2157574.svg" width="20%">
+        <br>
+        <h2><b>Halaman tidak ditemukan!</b></h2>
+        <h5>Mohon periksa kembali alamat yang Anda tuju</h5>
     </div>
-</body>
+    </div>
+    <br>
+    <object th:replace="fragments/fragment :: footer"></object>
+    </body>
 </html>
