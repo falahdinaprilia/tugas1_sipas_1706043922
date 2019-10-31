@@ -60,20 +60,3 @@ public class PasienServiceImpl implements PasienService {
         pasien.setKode(kode);
         }
     }
-//    @Override
-//    public void kodePasien(PasienModel pasien) {
-//        if ()
-//        int tahunLahir = Calendar.getInstance().get(Calendar.YEAR);
-//        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yy");
-//        String tanggalLahir = dateFormat.format(pasien.getTanggalLahir());
-//        String jenisKelamin = Integer.toString(pasien.getJenisKelamin());
-//        String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-//        StringBuilder hurufTemp = new StringBuilder(2);
-//        for(int i = 0; i<2; i++) {
-//            int idx = (int)(AlphaNumericString.length() * Math.random());
-//            hurufTemp.append(AlphaNumericString.charAt(idx));
-//        }
-//        String hurufRandom = hurufTemp.toString();
-//        String kode = Integer.toString(tahunLahir+5) + tanggalLahir + jenisKelamin + hurufRandom;
-//        pasien.setKode(kode);
-//    }

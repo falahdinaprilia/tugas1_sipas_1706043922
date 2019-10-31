@@ -10,8 +10,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -177,15 +175,6 @@ public class PasienController {
         model.addAttribute("pasienDiagnosis", pasienDiagnosis);
         return "tambah-diagnosis-pasien";
     }
-
-//    @RequestMapping(value = "/pasien/cari", method = RequestMethod.GET)
-//    public String cariPasienForm(Model model) {
-//        List<AsuransiModel> listAsuransi = asuransiService.getAsuransiList();
-//        List<DiagnosisPenyakitModel> listPenyakit = diagnosisService.getPenyakitList();
-//        model.addAttribute("listAsuransi", listAsuransi);
-//        model.addAttribute("listPenyakit", listPenyakit);
-//        return "form-cari-pasien";
-//    }
 
     @RequestMapping(value="/pasien/cari", method = RequestMethod.GET)
     public String cariPasien(@RequestParam(value = "idAsuransi", required = false) Long idAsuransi, @RequestParam(value = "idDiagnosis", required = false) Long idDiagnosis, Model model) {
