@@ -1,6 +1,7 @@
 package apap.tugas.sipas.controller;
 
 import apap.tugas.sipas.model.DiagnosisPenyakitModel;
+import apap.tugas.sipas.model.InvalidParameterException;
 import apap.tugas.sipas.model.PasienModel;
 import apap.tugas.sipas.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class DiagnosisPenyakitController {
@@ -46,8 +48,12 @@ public class DiagnosisPenyakitController {
     }
 
     @RequestMapping(value="/diagnosis-penyakit", method = RequestMethod.GET, params = "idDiagnosis")
-    public String viewPenyakit(@RequestParam(value = "idDiagnosis") Long id, Model model) {
-        DiagnosisPenyakitModel penyakit = diagnosisService.getPenyakitById(id).get();
+    public String viewPenyakit(@RequestParam(value = "idDiagnosis") Long id, Model model) throws InvalidParameterException {
+        Optional<DiagnosisPenyakitModel> tmp = diagnosisService.getPenyakitById(id);
+        if (tmp.isEmpty()) {
+            throw new InvalidParameterException();
+        }
+        DiagnosisPenyakitModel penyakit = tmp.get();
         List<PasienModel> listPasien = pasienDiagnosisService.getAllPasienByIdPenyakit(id);
         model.addAttribute("penyakit", penyakit);
         model.addAttribute("listPasien", listPasien);

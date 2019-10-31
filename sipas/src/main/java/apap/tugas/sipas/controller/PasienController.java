@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -96,10 +93,6 @@ public class PasienController {
             }
         }
         pasienService.kodePasien(pasien);
-//        AsuransiModel asuransiPasien = asuransiService.getAsuransiById(id).get();
-//        List<AsuransiModel> listAsuransiPasien = new ArrayList<AsuransiModel>();
-//        listAsuransiPasien.add(asuransiPasien);
-//        pasien.setListAsuransi(listAsuransiPasien);
         int count = 0;
         List<AsuransiModel> tmpListAsuransi = new ArrayList<>();
         for (AsuransiModel asuransi : pasien.getListAsuransi()) {
@@ -126,16 +119,24 @@ public class PasienController {
     }
 
     @RequestMapping(value = "/pasien", method = RequestMethod.GET, params = "nikPasien")
-    public String viewPasien(@RequestParam(value = "nikPasien") String nikPasien, Model model) {
-        PasienModel pasien = pasienService.getByNikPasien(nikPasien).get();
+    public String viewPasien(@RequestParam(value = "nikPasien") String nikPasien, Model model) throws PasienNotFoundException {
+        Optional<PasienModel> tmp = pasienService.getByNikPasien(nikPasien);
+        if (tmp.isEmpty()) {
+            throw new PasienNotFoundException(nikPasien);
+        }
+        PasienModel pasien = tmp.get();
         model.addAttribute("pasien", pasien);
         model.addAttribute("listAsuransi", pasien.getListAsuransi());
         return "lihat-pasien";
     }
 
     @RequestMapping(value = "/pasien/ubah/{nikPasien}", method = RequestMethod.GET)
-    public String ubahPasienForm(@PathVariable String nikPasien, Model model) {
-        PasienModel pasien = pasienService.getByNikPasien(nikPasien).get();
+    public String ubahPasienForm(@PathVariable String nikPasien, Model model) throws PasienNotFoundException {
+        Optional<PasienModel> tmp = pasienService.getByNikPasien(nikPasien);
+        if (tmp.isEmpty()) {
+            throw new PasienNotFoundException(nikPasien);
+        }
+        PasienModel pasien = tmp.get();
         model.addAttribute("pasien", pasien);
         return "form-ubah-pasien";
     }
@@ -151,8 +152,12 @@ public class PasienController {
     }
 
     @RequestMapping(value = "/pasien/{nikPasien}/tambah-diagnosis", method = RequestMethod.GET)
-    public String tambahDiagnosis(@PathVariable String nikPasien, Model model) {
-        PasienModel pasien = pasienService.getByNikPasien(nikPasien).get();
+    public String tambahDiagnosis(@PathVariable String nikPasien, Model model) throws PasienNotFoundException {
+        Optional<PasienModel> tmp = pasienService.getByNikPasien(nikPasien);
+        if (tmp.isEmpty()) {
+            throw new PasienNotFoundException(nikPasien);
+        }
+        PasienModel pasien = tmp.get();
         PasienDiagnosisPenyakitModel pasienDiagnosis = new PasienDiagnosisPenyakitModel();
         //        pasien.getListPasienDiagnosisPenyakit().add(pasienDiagnosis);
         List<DiagnosisPenyakitModel> listDiagnosis = diagnosisService.getPenyakitList();

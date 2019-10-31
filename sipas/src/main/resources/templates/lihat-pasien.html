@@ -17,8 +17,7 @@
     </div>
     <div class = "container">
         <div class ="card">
-            <div class = "card-header bg-dark text-white">
-                <h4 th:text="'Detail Data Pasien - ' + ${pasien.nik}"></h4>
+            <div class = "card-header bg-dark text-white text-bold" th:text="'Detail Data Pasien - ' + ${pasien.nik}">
             </div>
             <div class = "card-body">
                 <table class="table">
@@ -49,7 +48,7 @@
             </div>
         </div>
     </div>
-
+<br>
     <div class = "container">
         <div class ="card">
             <div class = "card-header bg-dark text-white">
@@ -67,6 +66,7 @@
     </div>
     <br>
     <a style="margin-left: 15%" th:href="@{/}" class="btn btn-sm btn-dark">Kembali ke Beranda</a>
+    <br>
     <br>
     <object th:replace="fragments/fragment :: footer"></object>
 
